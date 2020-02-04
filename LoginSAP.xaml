@@ -3,18 +3,19 @@
     <x:Property Name="pw" Type="InArgument(ss:SecureString)" />
     <x:Property Name="user" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1086.22222222222,2144</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1086.22222222222,3124.88888888889</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
   <TextExpression.NamespacesForImplementation>
-    <sco:Collection x:TypeArguments="x:String">
+    <scg1:List x:TypeArguments="x:String" Capacity="6">
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System</x:String>
-    </sco:Collection>
+      <x:String>System.Activities</x:String>
+    </scg1:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <sco:Collection x:TypeArguments="AssemblyReference">
+    <scg1:List x:TypeArguments="AssemblyReference" Capacity="14">
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -22,19 +23,23 @@
       <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
-    </sco:Collection>
+      <AssemblyReference>System.Activities</AssemblyReference>
+    </scg1:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="LoginSAP" sap:VirtualizedContainerService.HintSize="1066.22222222222,2084" sap2010:WorkflowViewState.IdRef="Sequence_7">
+  <Sequence DisplayName="LoginSAP" sap:VirtualizedContainerService.HintSize="1066.22222222222,3064.88888888889" sap2010:WorkflowViewState.IdRef="Sequence_7">
     <sap:WorkflowViewStateService.ViewState>
       <scg1:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg1:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1024.44444444444,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Logging in to SAP&quot;]" />
-    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1024.44444444444,1339.11111111111" sap2010:WorkflowViewState.IdRef="RetryScope_1">
+    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1024.44444444444,2320" sap2010:WorkflowViewState.IdRef="RetryScope_1">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="982.666666666667,1071.55555555556" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="982.666666666667,2052.44444444444" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Name="uiPathServerExists" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg1:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -52,6 +57,57 @@
                 </ui:Target>
               </ui:Activate.Target>
             </ui:Activate>
+            <ui:UiElementExists DisplayName="Element Exists 'list item  UiPath'" Exists="[uiPathServerExists]" sap:VirtualizedContainerService.HintSize="940.888888888889,106.666666666667" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+              <ui:UiElementExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d148d85a5cd3f8fbff378163acc5c7fe" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 750' /&gt;&lt;wnd ctrlid='5003' title='myContainer' /&gt;&lt;wnd ctrlid='1008' /&gt;&lt;ctrl name='UiPath' role='list item' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:UiElementExists.Target>
+            </ui:UiElementExists>
+            <If Condition="[Not uiPathServerExists]" sap:VirtualizedContainerService.HintSize="940.888888888889,794.222222222222" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="375.555555555556,644" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg1:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg1:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CopyConfig workflow" sap:VirtualizedContainerService.HintSize="333.777777777778,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="CopyConfig.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <scg1:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CloseSAPLogon workflow" sap:VirtualizedContainerService.HintSize="333.777777777778,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="CloseSAPLogon.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <scg1:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Delay DisplayName="Delay 3s" Duration="00:00:03" sap:VirtualizedContainerService.HintSize="333.777777777778,22.2222222222222" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke OpenSAP workflow" sap:VirtualizedContainerService.HintSize="333.777777777778,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="OpenSAP.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <scg1:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Activate 'SysListView32'" sap:VirtualizedContainerService.HintSize="333.777777777778,106.666666666667" sap2010:WorkflowViewState.IdRef="Activate_2">
+                    <ui:Activate.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d1011e51d0e2d9a004c6a268c94583e8" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 750' /&gt;&lt;wnd ctrlid='5003' title='myContainer' /&gt;&lt;wnd ctrlid='1008' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Activate.Target>
+                  </ui:Activate>
+                </Sequence>
+              </If.Then>
+            </If>
             <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'list item  UiPath'" sap:VirtualizedContainerService.HintSize="940.888888888889,134.666666666667" sap2010:WorkflowViewState.IdRef="SelectItem_1" Item="UiPath">
               <ui:SelectItem.Items>
                 <scg1:List x:TypeArguments="x:String" Capacity="4">
