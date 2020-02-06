@@ -3,7 +3,7 @@
     <x:Property Name="pw" Type="InArgument(ss:SecureString)" />
     <x:Property Name="user" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1086.22222222222,3124.88888888889</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1086.22222222222,3522.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
   <TextExpression.NamespacesForImplementation>
@@ -26,17 +26,17 @@
       <AssemblyReference>System.Activities</AssemblyReference>
     </scg1:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="LoginSAP" sap:VirtualizedContainerService.HintSize="1066.22222222222,3064.88888888889" sap2010:WorkflowViewState.IdRef="Sequence_7">
+  <Sequence DisplayName="LoginSAP" sap:VirtualizedContainerService.HintSize="1066.22222222222,3462.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
     <sap:WorkflowViewStateService.ViewState>
       <scg1:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg1:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1024.44444444444,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Logging in to SAP&quot;]" />
-    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1024.44444444444,2320" sap2010:WorkflowViewState.IdRef="RetryScope_1">
+    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="1024.44444444444,2454.66666666667" sap2010:WorkflowViewState.IdRef="RetryScope_1">
       <ui:RetryScope.ActivityBody>
         <ActivityAction>
-          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="982.666666666667,2052.44444444444" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="982.666666666667,2187.11111111111" sap2010:WorkflowViewState.IdRef="Sequence_8">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="uiPathServerExists" />
             </Sequence.Variables>
@@ -69,14 +69,15 @@
                 </ui:Target>
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
-            <If Condition="[Not uiPathServerExists]" sap:VirtualizedContainerService.HintSize="940.888888888889,794.222222222222" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Not uiPathServerExists]" sap:VirtualizedContainerService.HintSize="940.888888888889,928.888888888889" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="375.555555555556,644" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <Sequence sap:VirtualizedContainerService.HintSize="375.555555555556,778.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg1:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg1:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.777777777778,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;SAP config not loaded. Loading it now&quot;]" />
                   <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CopyConfig workflow" sap:VirtualizedContainerService.HintSize="333.777777777778,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="CopyConfig.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <scg1:Dictionary x:TypeArguments="x:String, Argument" />
@@ -210,6 +211,23 @@
         </ActivityFunc>
       </ui:RetryScope.Condition>
     </ui:RetryScope>
+    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window" sap:VirtualizedContainerService.HintSize="1024.44444444444,223.111111111111" sap2010:WorkflowViewState.IdRef="WindowScope_1" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;">
+      <ui:WindowScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="241.777777777778,114.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg1:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg1:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="200,22.2222222222222" sap2010:WorkflowViewState.IdRef="MaximizeWindow_1" />
+          </Sequence>
+        </ActivityAction>
+      </ui:WindowScope.Body>
+    </ui:WindowScope>
     <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Into 'TextField  User Name'" EmptyField="True" sap:VirtualizedContainerService.HintSize="1024.44444444444,134.666666666667" sap2010:WorkflowViewState.IdRef="TypeInto_1" SimulateType="False" Text="[user]">
       <ui:TypeInto.Target>
         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5316bd7deda55153c795d46b088a301d" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;&lt;sap id='usr/txtRSYST-BNAME' /&gt;">
